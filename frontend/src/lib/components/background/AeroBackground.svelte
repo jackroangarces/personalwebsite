@@ -62,7 +62,7 @@
   }
 
   function createLines() {
-    const centerY = height * 0.5;
+    const centerY = height * 0.35;
     const mainCount = isMobile
       ? Math.max(10, Math.floor(aeroConfig.lineCount * aeroConfig.reducedLineFactorMobile))
       : aeroConfig.lineCount;
