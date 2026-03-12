@@ -407,7 +407,7 @@
     width: 100%;
     height: 100%;
     display: block;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
   }
 </style>
