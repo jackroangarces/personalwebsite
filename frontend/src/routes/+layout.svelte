@@ -1,6 +1,7 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.png';
 	import popupSvg from '$lib/assets/popup.svg';
+	import backToTopSvg from '$lib/assets/buttons/backtotop.svg';
 	import Turbine from '$lib/components/Turbine.svelte';
 	import { theme } from '$lib/stores/theme';
 	import { copyEmail, showCopyPopup } from '$lib/stores/copyPopup';
@@ -62,5 +63,7 @@
 </div>
 
 <footer class="footer">
-	<button type="button" class="back-to-top" onclick={scrollToTop}>Back to top</button>
+	<button type="button" class="back-to-top" onclick={scrollToTop} aria-label="Back to top">
+		<img src={backToTopSvg} alt="" />
+	</button>
 </footer>

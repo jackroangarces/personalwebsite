@@ -247,15 +247,19 @@
     z-index: 20;
     pointer-events: auto;
     background: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 0.5rem 1rem;
+    border: none;
+    padding: 0.5rem;
     cursor: pointer;
-    font-size: 0.875rem;
+  }
+
+  .footer .back-to-top img {
+    display: block;
+    height: 3rem;
+    width: auto;
   }
 
   .footer .back-to-top:hover {
-    background: rgba(255, 255, 255, 0.1);
+    opacity: 0.85;
   }
 
   /** Hero section */
@@ -468,11 +472,6 @@
     background: white;
   }
 
-  html[data-theme='dark'] .footer .back-to-top {
-    border-color: black;
-    color: black;
-  }
-
   html[data-theme='dark'] .footer .back-to-top:hover {
-    background: rgba(0, 0, 0, 0.1);
+    opacity: 0.85;
   }

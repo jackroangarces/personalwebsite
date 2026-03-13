@@ -49,7 +49,7 @@
     <p>
       I'm an Informatics student on the software development track at the University of Washington. 
       I've been coding since I was 10 years old when I found MIT's Scratch. 
-      Since then, I've been determined to study programming and game development.
+      Since then, I've been determined to study both programming and game development.
     </p>
     <nav class="buttons" aria-label="Social and contact links"> 
       {#each buttons as button}
