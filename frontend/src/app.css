@@ -13,9 +13,9 @@
     repeating-linear-gradient(
       to bottom,
       #EFEFEF 0px,
-      #EFEFEF 4px,
-      #E7E7E7 4px,
-      #E7E7E7 8px
+      #EFEFEF 2px,
+      #E7E7E7 2px,
+      #E7E7E7 4px
     );
   }
   
@@ -28,6 +28,7 @@
     font-family: 'Noto Sans', sans-serif;
     letter-spacing: 0.02em;
     font-weight: bold;
+    color: #333;
   }
 
   /** Popups */
@@ -80,8 +81,106 @@
     left: 0;
     right: 0;
     height: 3.6rem;
-    background: white;
+    background: black;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1.5rem;
+  }
+
+  .nav-corner {
+    position: absolute;
+    top: 12px;
+    height: 3.6rem;
+    width: auto;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nav-corner--left {
+    left: 0;
+  }
+
+  .nav-corner--right {
+    left: auto;
+    right: 0;
+    transform: scaleX(-1);
+  }
+
+  .nav-text-btn {
+    position: relative;
+    z-index: 2;
+    background: none;
+    border: none;
+    padding: 0.35rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    font-kerning: none;
+    background: linear-gradient(to bottom, #37D9FF 0%, #33B9EF 50%, #47C5F0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .nav-text-btn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.1rem;
+    height: 2px;
+    background: linear-gradient(to bottom, #37D9FF 0%, #33B9EF 50%, #47C5F0 100%);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .nav-text-btn:hover::after {
+    opacity: 1;
+  }
+
+  .theme-toggle {
+    position: relative;
+    z-index: 2;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .theme-toggle-track {
+    display: block;
+    width: 44px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .theme-toggle:hover .theme-toggle-track {
+    background: #bbb;
+  }
+
+  .theme-toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+
+  .theme-toggle-knob.on {
+    transform: translateX(20px);
   }
 
   .navbar::after {
@@ -114,6 +213,7 @@
     padding-right: 5rem;
     margin-bottom: -60px;
     z-index: 10;
+    pointer-events: none;
   }
 
   /** Footer */
@@ -143,6 +243,9 @@
   }
 
   .footer .back-to-top {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
     background: transparent;
     border: 1px solid white;
     color: white;
@@ -264,4 +367,57 @@
 
   .hero h1.aero-title--small {
     font-size: clamp(5rem, 4vw, 2.5rem);
+  }
+
+  /** Dark mode */
+  html[data-theme='dark'] p,
+  html[data-theme='dark'] .copy-popup-text {
+    color: white;
+  }
+
+  html[data-theme='dark'],
+  html[data-theme='dark'] body {
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)),
+      repeating-linear-gradient(
+        to bottom,
+        #181818 0px,
+        #181818 4px,
+        #121212 4px,
+        #121212 8px
+      );
+  }
+
+  html[data-theme='dark'] .navbar {
+    background: white;
+  }
+
+  html[data-theme='dark'] .theme-toggle-track {
+    background: #444;
+  }
+
+  [data-theme='dark'] .theme-toggle:hover .theme-toggle-track {
+    background: #555;
+  }
+
+  html[data-theme='dark'] .theme-toggle-knob {
+    background: #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  html[data-theme='dark'] .theme-toggle-knob.on {
+    background: #666;
+  }
+
+  html[data-theme='dark'] .footer {
+    background: white;
+  }
+
+  html[data-theme='dark'] .footer .back-to-top {
+    border-color: black;
+    color: black;
+  }
+
+  html[data-theme='dark'] .footer .back-to-top:hover {
+    background: rgba(0, 0, 0, 0.1);
   }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { aeroConfig } from './aeroConfig';
+  import { theme } from '$lib/stores/theme';
   import { clamp, smoothstep, gaussianFalloff, distanceSquared } from '$lib/utils/aero/aeroMath';
 
   let canvas: HTMLCanvasElement;
@@ -259,20 +260,30 @@
     return points;
   }
 
-  function drawMistLine(points: Point[], line: MistLine, scrollFactor: number) {
+  function drawMistLine(
+    points: Point[],
+    line: MistLine,
+    scrollFactor: number,
+    colorBands: { line: string; glow: string }[]
+  ) {
     if (!ctx) return;
 
-    const colors = aeroConfig.colorBands[line.bandIndex];
+    const colors = colorBands[line.bandIndex];
     drawSmoothPath(points);
     ctx.strokeStyle = `rgba(${colors.glow}, ${line.alpha * scrollFactor})`;
     ctx.lineWidth = line.width;
     ctx.stroke();
   }
 
-  function drawCoreLine(points: Point[], line: AeroLine, scrollFactor: number) {
+  function drawCoreLine(
+    points: Point[],
+    line: AeroLine,
+    scrollFactor: number,
+    colorBands: { line: string; glow: string }[]
+  ) {
     if (!ctx) return;
 
-    const colors = aeroConfig.colorBands[line.bandIndex];
+    const colors = colorBands[line.bandIndex];
     const useBlur = !isMobile;
 
     ctx.save();
@@ -307,11 +318,12 @@
     upperPoints: Point[],
     lowerPoints: Point[],
     bandIndex: number,
-    scrollFactor: number
+    scrollFactor: number,
+    colorBands: { line: string; glow: string }[]
   ) {
     if (!ctx || upperPoints.length < 2 || lowerPoints.length < 2) return;
 
-    const colors = aeroConfig.colorBands[bandIndex];
+    const colors = colorBands[bandIndex];
     const midIndex = Math.floor(upperPoints.length / 2);
 
     const topMid = upperPoints[midIndex];
@@ -357,13 +369,15 @@
   function render(time: number) {
     if (!ctx || !canvas) return;
 
+    const isDark = $theme;
+    const colorBands = isDark ? aeroConfig.dark.colorBands : aeroConfig.colorBands;
+    const backgroundColor = isDark ? aeroConfig.dark.backgroundColor : aeroConfig.backgroundColor;
+
     const scrollFactor = getScrollFactor();
     const scrollYOffset = getScrollYOffset();
     canvas.style.opacity = String(scrollFactor);
 
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = aeroConfig.backgroundColor;
-    ctx.fillRect(0, 0, width, height);
 
     const mistPointSets = mistLines.map((line) => ({
       line,
@@ -377,7 +391,7 @@
 
     ctx.globalCompositeOperation = 'source-over';
     for (const { line, points } of mistPointSets) {
-      drawMistLine(points, line, scrollFactor * 0.9);
+      drawMistLine(points, line, scrollFactor * 0.9, colorBands);
     }
 
     // Ribbon fills between selected neighboring line pairs.
@@ -388,11 +402,11 @@
 
       const a = corePointSets[i];
       const b = corePointSets[i + 1];
-      drawRibbonFill(a.points, b.points, a.line.bandIndex, scrollFactor * 0.9);
+      drawRibbonFill(a.points, b.points, a.line.bandIndex, scrollFactor * 0.9, colorBands);
     }
 
     for (const { line, points } of corePointSets) {
-      drawCoreLine(points, line, scrollFactor);
+      drawCoreLine(points, line, scrollFactor, colorBands);
     }
 
     ctx.globalCompositeOperation = 'source-over';

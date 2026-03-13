@@ -45,5 +45,15 @@ export const aeroConfig = {
     sectionFalloffEnd: 0.5, 
 
     // Moves downward when scrolling to bottom proportional speed to page size.
-    scrollYOffsetMax: 200
+    scrollYOffsetMax: 200,
+
+    // Dark mode variants (no scroll fade/offset in dark mode)
+    dark: {
+      backgroundColor: 'rgba(24, 24, 24, 1)',
+      colorBands: [
+        { line: '60, 140, 220', glow: '80, 160, 240' },
+        { line: '70, 160, 235', glow: '100, 180, 245' },
+        { line: '80, 120, 200', glow: '110, 150, 230' }
+      ]
+    }
   };

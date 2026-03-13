@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { theme } from '$lib/stores/theme';
   import baseSvg from '$lib/assets/turbines/turbine_base.svg';
+  import baseSvgDark from '$lib/assets/turbines/turbine_base_darkmode.svg';
   import spinnerSvg from '$lib/assets/turbines/turbine_spinner.svg';
+  import spinnerSvgDark from '$lib/assets/turbines/turbine_spinner_darkmode.svg';
 
   interface Props {
     baseSpeed?: number;
@@ -63,9 +66,9 @@
 </script>
 
 <div class="turbine" bind:this={container} style="transform: scale({scale}); transform-origin: bottom center;">
-  <img src={baseSvg} alt="" class="turbine-base" />
+  <img src={$theme ? baseSvgDark : baseSvg} alt="" class="turbine-base" />
   <img
-    src={spinnerSvg}
+    src={$theme ? spinnerSvgDark : spinnerSvg}
     alt=""
     class="turbine-spinner"
     style="transform: rotate({rotation}deg)"
