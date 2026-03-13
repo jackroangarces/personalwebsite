@@ -9,8 +9,15 @@
   import letterboxdIcon from '$lib/assets/buttons/letterboxd.svg';
   import popupSvg from '$lib/assets/popup.svg';
   import resumePdf from '$lib/assets/jrg_resume.pdf';
+  import projectCardSvg from '$lib/assets/project-card.svg';
 
   const email = 'jrgarces@uw.edu';
+
+  const projectCards = [
+    {},
+    {},
+    {},
+  ];
   let showCopyPopup = $state(false);
   const name = 'Jack Garces';
   const projects = 'Projects';
@@ -35,6 +42,10 @@
     setTimeout(() => (showCopyPopup = false), 2000);
   }
 </script>
+
+<svelte:head>
+  <link rel="preload" href={popupSvg} as="image" />
+</svelte:head>
 
 <AeroBackground />
 
@@ -74,6 +85,16 @@
     <p>
       coming soon...
     </p>
+  </div>
+  <div class="project-cards">
+    {#each projectCards as _}
+      <div class="project-card">
+        <img src={projectCardSvg} alt="" class="project-card-frame" />
+        <div class="project-card-content"></div>
+      </div>
+    {/each}
+  </div>
+  <div class="content">
     <h1 class="aero-title aero-title--small">
       <span class="aero-title-shadow" aria-hidden="true">{extrasTxt}</span>
       <span class="aero-title-text">{extrasTxt}</span>

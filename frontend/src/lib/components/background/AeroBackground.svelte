@@ -149,14 +149,29 @@
 
   function getScrollFactor() {
     const scrollY = getScrollY();
-    const normalized = scrollY / Math.max(height, 1);
+    const maxScroll = Math.max(
+      document.documentElement.scrollHeight - height,
+      document.body.scrollHeight - height,
+      1
+    );
+    const viewportHeight = Math.max(height, 1);
 
-    const strongZone = 1 - smoothstep(
+    const distanceFromTop = scrollY / viewportHeight;
+    const distanceFromBottom = (maxScroll - scrollY) / viewportHeight;
+
+    const topFactor = 1 - smoothstep(
       aeroConfig.heroBoostEnd,
       aeroConfig.sectionFalloffEnd,
-      normalized
+      distanceFromTop
     );
 
+    const bottomFactor = 1 - smoothstep(
+      aeroConfig.heroBoostEnd,
+      aeroConfig.sectionFalloffEnd,
+      distanceFromBottom
+    );
+
+    const strongZone = Math.max(topFactor, bottomFactor);
     return clamp(strongZone, 0.6, 1);
   }
 
