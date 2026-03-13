@@ -7,18 +7,18 @@
   import backloggdIcon from '$lib/assets/buttons/backloggd.svg';
   import malIcon from '$lib/assets/buttons/mal.svg';
   import letterboxdIcon from '$lib/assets/buttons/letterboxd.svg';
-  import popupSvg from '$lib/assets/popup.svg';
   import resumePdf from '$lib/assets/jrg_resume.pdf';
   import projectCardSvg from '$lib/assets/project-card.svg';
-
-  const email = 'jrgarces@uw.edu';
+  import { copyEmail } from '$lib/stores/copyPopup';
 
   const projectCards = [
     {},
     {},
     {},
+    {},
+    {},
+    {},
   ];
-  let showCopyPopup = $state(false);
   const name = 'Jack Garces';
   const projects = 'Projects';
   const extrasTxt = 'Extras';
@@ -36,36 +36,22 @@
     { type: 'link', href: 'https://letterboxd.com/sarrasins/', icon: letterboxdIcon, alt: 'Letterboxd' }
   ];
 
-  async function copyEmail() {
-    await navigator.clipboard.writeText(email);
-    showCopyPopup = true;
-    setTimeout(() => (showCopyPopup = false), 2000);
-  }
 </script>
-
-<svelte:head>
-  <link rel="preload" href={popupSvg} as="image" />
-</svelte:head>
 
 <AeroBackground />
 
-{#if showCopyPopup}
-  <div class="copy-popup">
-    <img src={popupSvg} alt="" class="copy-popup-bg" />
-    <span class="copy-popup-text">copied to clipboard!</span>
-  </div>
-{/if}
-
 <section class="hero">
-  <div class="content">
+  <div class="content" id="about">
     <h1 class="aero-title">
       <span class="aero-title-shadow" aria-hidden="true">{name}</span>
       <span class="aero-title-text">{name}</span>
     </h1>
     <p>
-      I'm an Informatics student on the software development track at the University of Washington. I've been coding since I was 10 years old when I found MIT's Scratch. Since then I've been determined to study programming and game development.
+      I'm an Informatics student on the software development track at the University of Washington. 
+      I've been coding since I was 10 years old when I found MIT's Scratch. 
+      Since then, I've been determined to study programming and game development.
     </p>
-    <nav class="buttons" aria-label="Social and contact links">
+    <nav class="buttons" aria-label="Social and contact links"> 
       {#each buttons as button}
         {#if button.type === 'link'}
           <a href={button.href} class="button-link" target="_blank" rel="noopener noreferrer">
@@ -78,7 +64,7 @@
         {/if}
       {/each}
     </nav>
-    <h1 class="aero-title aero-title--small">
+    <h1 class="aero-title aero-title--small" id="projects">
       <span class="aero-title-shadow" aria-hidden="true">{projects}</span>
       <span class="aero-title-text">{projects}</span>
     </h1>
@@ -95,7 +81,7 @@
     {/each}
   </div>
   <div class="content">
-    <h1 class="aero-title aero-title--small">
+    <h1 class="aero-title aero-title--small" id="extras">
       <span class="aero-title-shadow" aria-hidden="true">{extrasTxt}</span>
       <span class="aero-title-text">{extrasTxt}</span>
     </h1>

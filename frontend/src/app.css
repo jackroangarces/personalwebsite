@@ -118,7 +118,7 @@
     cursor: pointer;
     font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
     letter-spacing: 0.08em;
     font-kerning: none;
     background: linear-gradient(to bottom, #37D9FF 0%, #33B9EF 50%, #47C5F0 100%);
@@ -367,6 +367,11 @@
 
   .hero h1.aero-title--small {
     font-size: clamp(5rem, 4vw, 2.5rem);
+  }
+
+  #projects,
+  #extras {
+    scroll-margin-top: 4.2rem;
   }
 
   /** Project cards */
