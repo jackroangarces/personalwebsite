@@ -123,13 +123,31 @@
     createLines();
   }
 
-  function getScrollFactor() {
-    // Use multiple sources: body/height:100% can make window.scrollY stay 0
-    const scrollY = Math.max(
+  function getScrollY() {
+    return Math.max(
       window.scrollY ?? 0,
       document.documentElement.scrollTop ?? 0,
       document.body.scrollTop ?? 0
     );
+  }
+
+  function getScrollProgress() {
+    const scrollY = getScrollY();
+    const maxScroll = Math.max(
+      document.documentElement.scrollHeight - height,
+      document.body.scrollHeight - height,
+      1
+    );
+    return clamp(scrollY / maxScroll, 0, 1);
+  }
+
+  function getScrollYOffset() {
+    const progress = getScrollProgress();
+    return progress * aeroConfig.scrollYOffsetMax;
+  }
+
+  function getScrollFactor() {
+    const scrollY = getScrollY();
     const normalized = scrollY / Math.max(height, 1);
 
     const strongZone = 1 - smoothstep(
@@ -169,7 +187,12 @@
     ctx.lineTo(last.x, last.y);
   }
 
-  function buildMistPoints(line: MistLine, time: number, scrollFactor: number): Point[] {
+  function buildMistPoints(
+    line: MistLine,
+    time: number,
+    scrollFactor: number,
+    scrollYOffset: number
+  ): Point[] {
     const points: Point[] = [];
 
     for (let x = 0; x <= width + sampleStep; x += sampleStep) {
@@ -177,6 +200,7 @@
 
       const baseY =
         line.offsetY +
+        scrollYOffset +
         arc +
         line.drift * Math.sin(time * 0.00012 + line.phase) +
         Math.sin(x * line.frequency + time * line.speed + line.phase) * line.amplitude;
@@ -199,7 +223,12 @@
     return points;
   }
 
-  function buildCorePoints(line: AeroLine, time: number, scrollFactor: number): Point[] {
+  function buildCorePoints(
+    line: AeroLine,
+    time: number,
+    scrollFactor: number,
+    scrollYOffset: number
+  ): Point[] {
     const points: Point[] = [];
 
     for (let x = 0; x <= width + sampleStep; x += sampleStep) {
@@ -207,6 +236,7 @@
 
       const baseY =
         line.offsetY +
+        scrollYOffset +
         arc +
         line.drift * Math.sin(time * 0.00016 + line.phase) +
         Math.sin(x * line.frequency + time * line.speed + line.phase) * line.amplitude;
@@ -328,6 +358,7 @@
     if (!ctx || !canvas) return;
 
     const scrollFactor = getScrollFactor();
+    const scrollYOffset = getScrollYOffset();
     canvas.style.opacity = String(scrollFactor);
 
     ctx.clearRect(0, 0, width, height);
@@ -336,12 +367,12 @@
 
     const mistPointSets = mistLines.map((line) => ({
       line,
-      points: buildMistPoints(line, time, scrollFactor * 0.9)
+      points: buildMistPoints(line, time, scrollFactor * 0.9, scrollYOffset)
     }));
 
     const corePointSets = lines.map((line) => ({
       line,
-      points: buildCorePoints(line, time, scrollFactor)
+      points: buildCorePoints(line, time, scrollFactor, scrollYOffset)
     }));
 
     ctx.globalCompositeOperation = 'source-over';

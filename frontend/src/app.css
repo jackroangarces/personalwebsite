@@ -170,13 +170,15 @@
     max-width: 1000px;
   }
 
-  .hero .buttons {
+  .hero .buttons,
+  .hero .extras {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
     padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .hero .button-link {
@@ -258,4 +260,8 @@
 
   .aero-title-text {
     position: relative;
+  }
+
+  .hero h1.aero-title--small {
+    font-size: clamp(5rem, 4vw, 2.5rem);
   }

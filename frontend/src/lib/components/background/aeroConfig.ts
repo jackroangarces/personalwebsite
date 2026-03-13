@@ -38,8 +38,12 @@ export const aeroConfig = {
   
     mobileBreakpoint: 768,
     reducedLineFactorMobile: 0.55,
-  
+    
+    // Fades when scrolling to bottom.
     heroBoostStart: 0,
-    heroBoostEnd: 0.1, // proportion of viewport height where effect is strongest
-    sectionFalloffEnd: 0.5 // fades more after this viewport-height multiple
+    heroBoostEnd: 0.1, 
+    sectionFalloffEnd: 0.5, 
+
+    // Moves downward when scrolling to bottom proportional speed to page size.
+    scrollYOffsetMax: 200
   };
