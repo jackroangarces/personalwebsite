@@ -8,16 +8,68 @@
   import malIcon from '$lib/assets/buttons/mal.svg';
   import letterboxdIcon from '$lib/assets/buttons/letterboxd.svg';
   import resumePdf from '$lib/assets/jrg_resume.pdf';
-  import projectCardSvg from '$lib/assets/project-card.svg';
+  import ProjectCard from '$lib/components/ProjectCard.svelte';
   import { copyEmail } from '$lib/stores/copyPopup';
+  import miiPose from '$lib/assets/miimariopose.png';
+  import ros from '$lib/assets/project-assets/ros.png';
+  import seal from '$lib/assets/project-assets/seal.png';
+  import vouch from '$lib/assets/project-assets/vouch.png';
+  import congress from '$lib/assets/project-assets/congress.png';
+  import husky from '$lib/assets/project-assets/husky.png';
 
   const projectCards = [
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
+    {
+      header: 'Popcorn MCP',
+      image: miiPose,
+      body: 'Developed a full-stack MCP server and AI agent wrapper integrating project management, tracking, and communication tools into a unified system with persistent context awareness. Built backend APIs and tool interfaces enabling AI agents to retrieve data and trigger workflows through an MCP-based architecture.',
+      buttons: [
+        { style: 'orange', label: 'Closed Source'}
+      ]
+    },
+    {
+      header: 'SEAL Lab Dashboard',
+      image: seal,
+      body: 'Rebuilt SEAL’s legacy Google Sheets–based workflow into a secure lab-wide web application with improved data architecture and user interface design. Implemented Google OAuth authentication, PostgreSQL database-backed data management, and AI-assisted tooling to streamline research workflows and reduce manual data handling',
+      buttons: [
+        { style: 'orange', label: 'Closed Source'}
+      ]
+    },
+    {
+      header: 'Husky Maps',
+      image: husky,
+      body: 'Developed HuskyMaps, a web app that helps users find businesses in Seattle and the shortest paths between them. The app synthesizes data structures by leveraging shortest path algorithms, priority queues, deques, and autocomplete.',
+      buttons: [
+        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/huskymaps' },
+        { style: 'blue', label: 'Live', href: 'https://husky-maps-59fb.onrender.com/#lon=-122.3035&lat=47.6553&zoom=11' }
+      ]
+    },
+    {
+      header: 'Congress.AI',
+      image: congress,
+      body: 'Developed Congress.AI (a web application leveraging AWS Amplify, MongoDB, and AWS Bedrock) as part of a four person team enabling smooth user interaction with bill summaries and voting records for each United States representative.',
+      buttons: [
+        { style: 'orange', label: 'Closed Source' },
+        { style: 'blue', label: 'Demo', href: 'https://devpost.com/software/congress-ai' }
+      ]
+    },
+    {
+      header: 'Vouch',
+      image: vouch,
+      body: 'Developed a web application that helps users discover local small businesses based on unique experiences rather than popularity metrics. Implemented real-time data management with Firebase and built features for creating, reading, updating, and managing business listings to support local economic growth and improve visibility for small businesses.',
+      buttons: [
+        { style: 'orange', label: 'Coming Soon' },
+        { style: 'blue', label: 'Live', href: 'https://vouch-f1ff1.web.app/' }
+      ]
+    },
+    {
+      header: 'Resume Optimizer',
+      image: ros,
+      body: 'Developed a web application that allows users to build, share, and optimize their SWE resume. Implemented AI resume feedback by comparing extracted job requirements with resume content, improving alignment with ATS filters.',
+      buttons: [
+        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/resume-optimization-assistant' },
+        { style: 'blue', label: 'Live', href: 'https://resume-optimization-syst-543be.web.app/' }
+      ]
+    },
   ];
   const name = 'Jack Garces';
   const projects = 'Projects';
@@ -64,6 +116,7 @@
         {/if}
       {/each}
     </nav>
+    <img src={miiPose} alt="my Mii avatar" class="miipose" />
     <h1 class="aero-title aero-title--small" id="projects">
       <span class="aero-title-shadow" aria-hidden="true">{projects}</span>
       <span class="aero-title-text">{projects}</span>
@@ -73,11 +126,13 @@
     </p>
   </div>
   <div class="project-cards">
-    {#each projectCards as _}
-      <div class="project-card">
-        <img src={projectCardSvg} alt="" class="project-card-frame" />
-        <div class="project-card-content"></div>
-      </div>
+    {#each projectCards as card}
+      <ProjectCard
+        header={card.header ?? ''}
+        image={card.image}
+        body={card.body ?? ''}
+        buttons={card.buttons ?? []}
+      />
     {/each}
   </div>
   <div class="content">
