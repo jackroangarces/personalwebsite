@@ -10,7 +10,6 @@
     baseSpeed?: number;
     maxSpeed?: number;
     proximityRadius?: number;
-    /** Scale factor for size (1 = full, 0.5 = half) */
     scale?: number;
   }
 
@@ -97,5 +96,11 @@
     margin-left: -60%;
     height: auto;
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .turbine-spinner {
+      top: -79px;
+    }
   }
 </style>

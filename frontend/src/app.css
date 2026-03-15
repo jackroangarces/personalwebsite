@@ -7,6 +7,7 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    overscroll-behavior: none;
     -ms-overflow-style: none; 
     scrollbar-width: none;    
     background:
@@ -536,6 +537,27 @@
   }
 
   @media (max-width: 768px) {
+    .hero {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
+    .project-card-content {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .project-card .project-card-body {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .project-card-image-wrap {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .project-cards {
       grid-template-columns: repeat(2, 1fr);
     }
