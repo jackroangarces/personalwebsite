@@ -32,7 +32,14 @@
     {#if buttons.length > 0}
       <div class="project-card-buttons">
         {#each buttons.slice(0, 2) as btn}
-          {#if btn.href}
+          {#if btn.style === 'orange'}
+            <span
+              class="project-card-btn project-card-btn--static"
+              style="--btn-bg: url({projectButtonStyles[btn.style]})"
+            >
+              {btn.label}
+            </span>
+          {:else if btn.href}
             <a
               href={btn.href}
               class="project-card-btn"

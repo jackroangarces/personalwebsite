@@ -16,11 +16,12 @@
   import vouch from '$lib/assets/project-assets/vouch.png';
   import congress from '$lib/assets/project-assets/congress.png';
   import husky from '$lib/assets/project-assets/husky.png';
+  import pop from '$lib/assets/project-assets/pop.png';
 
   const projectCards = [
     {
       header: 'Popcorn MCP',
-      image: miiPose,
+      image: pop,
       body: 'Developed a full-stack MCP server and AI agent wrapper integrating project management, tracking, and communication tools into a unified system with persistent context awareness. Built backend APIs and tool interfaces enabling AI agents to retrieve data and trigger workflows through an MCP-based architecture.',
       buttons: [
         { style: 'orange', label: 'Closed Source'}
