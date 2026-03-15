@@ -2,6 +2,8 @@
 	import favicon from '$lib/assets/favicon.png';
 	import popupSvg from '$lib/assets/popup.svg';
 	import backToTopSvg from '$lib/assets/buttons/backtotop.svg';
+	import sliderSvg from '$lib/assets/slider.png';
+	import sliderDarkSvg from '$lib/assets/slider_dark.png';
 	import Turbine from '$lib/components/Turbine.svelte';
 	import { theme } from '$lib/stores/theme';
 	import { copyEmail, showCopyPopup } from '$lib/stores/copyPopup';
@@ -39,7 +41,7 @@
 	<button type="button" class="nav-text-btn" onclick={() => scrollToSection('projects')}>Projects</button>
 	<button type="button" class="nav-text-btn" onclick={() => scrollToSection('extras')}>Extras</button>
 	<button type="button" class="nav-text-btn" onclick={copyEmail}>Contact</button>
-	<button type="button" class="nav-text-btn" onclick= {window.open('https://github.com/jackroangarces/personalwebsite', '_blank')}>Source</button>
+	<button type="button" class="nav-text-btn" onclick={() => window.open('https://github.com/jackroangarces/personalwebsite', '_blank')}>Source</button>
 	<button
 		type="button"
 		class="theme-toggle"
@@ -48,6 +50,7 @@
 		title={$theme ? 'Light mode' : 'Dark mode'}
 	>
 		<span class="theme-toggle-track">
+			<img src={$theme ? sliderDarkSvg : sliderSvg} alt="" class="theme-toggle-track-img" />
 			<span class="theme-toggle-knob" class:on={$theme}></span>
 		</span>
 	</button>

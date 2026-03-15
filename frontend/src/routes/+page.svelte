@@ -9,6 +9,7 @@
   import letterboxdIcon from '$lib/assets/buttons/letterboxd.svg';
   import resumePdf from '$lib/assets/jrg_resume.pdf';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
+  import type { ProjectButtonStyle } from '$lib/assets/projectButtons';
   import { copyEmail } from '$lib/stores/copyPopup';
   import miiPose from '$lib/assets/miimariopose.png';
   import ros from '$lib/assets/project-assets/ros.png';
@@ -18,7 +19,12 @@
   import husky from '$lib/assets/project-assets/husky.png';
   import pop from '$lib/assets/project-assets/pop.png';
 
-  const projectCards = [
+  const projectCards: Array<{
+    header: string;
+    image: string;
+    body: string;
+    buttons: Array<{ style: ProjectButtonStyle; label: string; href?: string }>;
+  }> = [
     {
       header: 'Popcorn MCP',
       image: pop,

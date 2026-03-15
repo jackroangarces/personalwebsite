@@ -158,22 +158,24 @@
     display: block;
     width: 44px;
     height: 24px;
-    background: #ccc;
-    border-radius: 12px;
     position: relative;
-    transition: background 0.2s ease;
+    overflow: hidden;
   }
 
-  .theme-toggle:hover .theme-toggle-track {
-    background: #bbb;
+  .theme-toggle-track-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
   }
 
   .theme-toggle-knob {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
     background: white;
     border-radius: 50%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -539,11 +541,11 @@
     }
 
     .turbine-wrapper {
-      transform: translateY(5px);
+      transform: translateY(10px);
     }
 
     .hero .extras {
-      padding-bottom: 4rem;
+      padding-bottom: 6rem;
     }
 
     .hero .buttons .button-link img,
@@ -553,7 +555,7 @@
     }
 
     .nav-text-btn {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       padding: 0.25rem;
       margin-right: 0.5rem;
     }
@@ -596,14 +598,6 @@
 
   html[data-theme='dark'] .navbar {
     background: black;
-  }
-
-  html[data-theme='dark'] .theme-toggle-track {
-    background: #444;
-  }
-
-  [data-theme='dark'] .theme-toggle:hover .theme-toggle-track {
-    background: #555;
   }
 
   html[data-theme='dark'] .theme-toggle-knob {
