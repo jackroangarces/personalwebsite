@@ -543,8 +543,7 @@
     }
 
     .project-card-content {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding: 1.5rem 1.5rem 1.25rem;
     }
 
     .project-card .project-card-body {
@@ -553,9 +552,13 @@
     }
 
     .project-card-image-wrap {
-      width: 80%;
+      width: 90%;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .project-card-buttons {
+      padding-bottom: 1.25rem;
     }
 
     .project-cards {
@@ -600,8 +603,7 @@
   }
 
   /** Dark mode */
-  html[data-theme='dark'] p,
-  html[data-theme='dark'] .copy-popup-text {
+  html[data-theme='dark'] {
     color: white;
   }
 

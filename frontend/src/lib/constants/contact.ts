@@ -1,1 +1,1 @@
-export const email = 'jrgarces@uw.edu';
+export const email = 'jrgarces.dev@gmail.com';
