@@ -624,6 +624,10 @@
     background: black;
   }
 
+  html[data-theme='dark'] p {
+    color: white;
+  }
+
   html[data-theme='dark'] .theme-toggle-knob {
     background: #333;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);

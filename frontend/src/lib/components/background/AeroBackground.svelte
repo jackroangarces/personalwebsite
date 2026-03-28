@@ -11,7 +11,8 @@
   let width = 0;
   let height = 0;
   let dpr = 1;
-  let isMobile = false;
+  /** Fewer lines, wider samples, no canvas blur — matches narrow phones and other low-GPU cases. */
+  let reducedEffects = false;
 
   type MouseState = {
     x: number;
@@ -64,11 +65,11 @@
 
   function createLines() {
     const centerY = height * 0.35;
-    const mainCount = isMobile
+    const mainCount = reducedEffects
       ? Math.max(10, Math.floor(aeroConfig.lineCount * aeroConfig.reducedLineFactorMobile))
       : aeroConfig.lineCount;
 
-    const mistCount = isMobile
+    const mistCount = reducedEffects
       ? Math.max(8, Math.floor(aeroConfig.mistLineCount * aeroConfig.reducedLineFactorMobile))
       : aeroConfig.mistLineCount;
 
@@ -106,11 +107,16 @@
   function resizeCanvas() {
     if (!canvas) return;
 
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth;
     height = window.innerHeight;
-    isMobile = width <= aeroConfig.mobileBreakpoint;
-    sampleStep = isMobile ? aeroConfig.sampleStepMobile : aeroConfig.sampleStepDesktop;
+    const nav = navigator as Navigator & { deviceMemory?: number };
+    const lowMem = typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 4;
+    reducedEffects =
+      width <= aeroConfig.mobileBreakpoint ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      lowMem;
+    dpr = Math.min(window.devicePixelRatio || 1, reducedEffects ? 1 : 2);
+    sampleStep = reducedEffects ? aeroConfig.sampleStepMobile : aeroConfig.sampleStepDesktop;
 
     canvas.width = width * dpr;
     canvas.height = height * dpr;
@@ -299,7 +305,7 @@
     if (!ctx) return;
 
     const colors = colorBands[line.bandIndex];
-    const useBlur = !isMobile;
+    const useBlur = !reducedEffects;
 
     ctx.save();
 
@@ -382,7 +388,7 @@
   }
 
   function render(time: number) {
-    if (!ctx || !canvas) return;
+    if (!ctx || !canvas || document.hidden) return;
 
     const isDark = $theme;
     const colorBands = isDark ? aeroConfig.dark.colorBands : aeroConfig.colorBands;
@@ -443,16 +449,32 @@
   onMount(() => {
     resizeCanvas();
 
+    const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onMotionPrefChange = () => resizeCanvas();
+    motionMq.addEventListener('change', onMotionPrefChange);
+
+    function onVisibilityChange() {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      } else {
+        animationFrame = requestAnimationFrame(render);
+      }
+    }
+
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     animationFrame = requestAnimationFrame(render);
 
     return () => {
+      motionMq.removeEventListener('change', onMotionPrefChange);
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       cancelAnimationFrame(animationFrame);
     };
   });

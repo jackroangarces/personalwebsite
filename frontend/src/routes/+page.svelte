@@ -18,6 +18,7 @@
   import congress from '$lib/assets/project-assets/congress.png';
   import husky from '$lib/assets/project-assets/husky.png';
   import pop from '$lib/assets/project-assets/pop.png';
+  import localMeta from '$lib/assets/project-assets/localmeta.png';
 
   const projectCards: Array<{
     header: string;
@@ -25,6 +26,15 @@
     body: string;
     buttons: Array<{ style: ProjectButtonStyle; label: string; href?: string }>;
   }> = [
+    {
+      header: 'Local Meta',
+      image: localMeta,
+      body: 'Designed and implemented a full-stack analytics platform for competitive gaming using FastAPI and PostgreSQL, with automated web scraping and CI/CD pipelines via GitHub Actions, enabling real-time player rankings, matchup statistics, and meta insights across regional tournaments.',
+      buttons: [
+        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/local-meta' },
+        { style: 'blue', label: 'Live', href: 'https://local-meta.vercel.app/' }
+      ]
+    },
     {
       header: 'Popcorn MCP',
       image: pop,
@@ -128,9 +138,6 @@
       <span class="aero-title-shadow" aria-hidden="true">{projects}</span>
       <span class="aero-title-text">{projects}</span>
     </h1>
-    <p>
-      coming soon...
-    </p>
   </div>
   <div class="project-cards">
     {#each projectCards as card}
