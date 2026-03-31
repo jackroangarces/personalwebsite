@@ -52,6 +52,24 @@
       ]
     },
     {
+      header: 'Vouch',
+      image: vouch,
+      body: 'Developed a web application that helps users discover local small businesses based on unique experiences rather than popularity metrics. Implemented real-time data management with Firebase and built features for creating, reading, updating, and managing business listings to support local economic growth and improve visibility for small businesses.',
+      buttons: [
+        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/vouch-442' },
+        { style: 'blue', label: 'Live', href: 'https://vouch-f1ff1.web.app/' }
+      ]
+    },
+    {
+      header: 'Resume Optimizer',
+      image: ros,
+      body: 'Developed a web application that allows users to build, share, and optimize their SWE resume. Implemented AI resume feedback by comparing extracted job requirements with resume content, improving alignment with ATS filters.',
+      buttons: [
+        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/resume-optimization-assistant' },
+        { style: 'blue', label: 'Live', href: 'https://resume-optimization-syst-543be.web.app/' }
+      ]
+    },
+    {
       header: 'Husky Maps',
       image: husky,
       body: 'Developed HuskyMaps, a web app that helps users find businesses in Seattle and the shortest paths between them. The app synthesizes data structures by leveraging shortest path algorithms, priority queues, deques, and autocomplete.',
@@ -67,24 +85,6 @@
       buttons: [
         { style: 'orange', label: 'Closed Source' },
         { style: 'blue', label: 'Demo', href: 'https://devpost.com/software/congress-ai' }
-      ]
-    },
-    {
-      header: 'Vouch',
-      image: vouch,
-      body: 'Developed a web application that helps users discover local small businesses based on unique experiences rather than popularity metrics. Implemented real-time data management with Firebase and built features for creating, reading, updating, and managing business listings to support local economic growth and improve visibility for small businesses.',
-      buttons: [
-        { style: 'orange', label: 'Coming Soon' },
-        { style: 'blue', label: 'Live', href: 'https://vouch-f1ff1.web.app/' }
-      ]
-    },
-    {
-      header: 'Resume Optimizer',
-      image: ros,
-      body: 'Developed a web application that allows users to build, share, and optimize their SWE resume. Implemented AI resume feedback by comparing extracted job requirements with resume content, improving alignment with ATS filters.',
-      buttons: [
-        { style: 'green', label: 'Open Source', href: 'https://github.com/jackroangarces/resume-optimization-assistant' },
-        { style: 'blue', label: 'Live', href: 'https://resume-optimization-syst-543be.web.app/' }
       ]
     },
   ];
